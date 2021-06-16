@@ -1,13 +1,12 @@
-name: Example workflow for Python using Snyk 
+name: Example workflow For Snyk Code
 on: pull_request
 jobs:
   security:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/setup@master
+    - uses: snyk/actions/setup@master
+    - name: Snyk Code Test
+      run: snyk test --json --print-deps | snyk-delta
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --code
